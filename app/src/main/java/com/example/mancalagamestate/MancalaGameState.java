@@ -52,4 +52,56 @@ public class MancalaGameState implements Serializable {
                 + Arrays.toString(computerPlayer) + "\nisHumansTurn = " + isHumansTurn + "\nrowIsEmpty = " + rowIsEmpty;
     }
 
+    public boolean selectPit(int row, int col) { //columns labeled 0-6, where 0 is the first pocket and 6 is the store
+        if(isHumansTurn) {
+            if(row == 1 && humanPlayer[col] != 0 && humanPlayer[col] != 6) { //cant make a move from an empty pit, one that isn't yours, or your store
+                //set selected pit to zero
+                int numMarbles = humanPlayer[col];
+                humanPlayer[col] = 0;
+                //add one marble to each pit while there are still marbles going into other array if necessary
+                addMarblesToHuman(numMarbles,col);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            if (row == 1 && computerPlayer[col] != 0 && computerPlayer[col] != 6) { //cant make a move from an empty pit, one that isn't yours, or your store
+                //set selected pit to zero
+                int numMarbles = computerPlayer[col];
+                computerPlayer[col] = 0;
+                //add one marble to each pit while there are still marbles going into other array if necessary
+                addMarblesToComputer(numMarbles, col);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public void addMarblesToHuman(int numMarbles, int col){
+        while(numMarbles > 0) {
+            if(col != humanPlayer.length) {
+                humanPlayer[col++] += 1;
+            }
+            else {
+                addMarblesToComputer(numMarbles, 0); //would start at the beginning of the marbles array
+            }
+            numMarbles--;
+        }
+    }
+
+    public void addMarblesToComputer(int numMarbles, int col) {
+        while(numMarbles > 0) {
+            if(col != computerPlayer.length) {
+                computerPlayer[col++] += 1;
+            }
+            else {
+                addMarblesToHuman(numMarbles, 0); //would start at the beginning of the human array
+            }
+            numMarbles--;
+        }
+    }
+
 }
