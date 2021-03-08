@@ -35,6 +35,8 @@ public class MancalaGameState implements Serializable {
     //copy Constructor
     public MancalaGameState(MancalaGameState original)
     {
+        humanPlayer = new int[7];
+        computerPlayer = new int[7];
         for(int i = 0; i< humanPlayer.length; i++){ //humanPlayer.length and computerPlayer.length will always be the same
             humanPlayer[i] = original.humanPlayer[i];
             computerPlayer[i] = original.computerPlayer[i];

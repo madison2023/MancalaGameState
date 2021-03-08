@@ -31,7 +31,14 @@ public class MainActivity extends AppCompatActivity {
         // Legal move
         editText.setText(" ");
         firstInstance.selectPit(1, 3);
-        editText.setText("Player one has selected pit 3");
+        editText.setText("Player one has selected pit 3\n");
+
+        // Illegal move
+        editText.setText(" ");
+        firstInstance.selectPit(0, 3);
+        editText.append("Player one has selected illegal pit");
+
+        secondInstance.toString();
 
     }
 }
