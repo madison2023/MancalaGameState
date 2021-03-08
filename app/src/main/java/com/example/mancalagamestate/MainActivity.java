@@ -25,20 +25,17 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View button){
         MancalaGameState firstInstance = new MancalaGameState();
         MancalaGameState secondInstance = new MancalaGameState(firstInstance);
+        MancalaGameState thirdInstance = new MancalaGameState();
+        MancalaGameState fourthInstance = new MancalaGameState(thirdInstance);
 
         TextView editText = findViewById(R.id.editText);
 
         // Legal move
         editText.setText(" ");
         firstInstance.selectPit(1, 3);
-        editText.setText("Player one has selected pit 3\n");
+        editText.setText("Player one has selected pit 3");
 
-        // Illegal move
-        editText.setText(" ");
-        firstInstance.selectPit(0, 3);
-        editText.append("Player one has selected illegal pit");
-
-        secondInstance.toString();
+        editText.append(secondInstance.toString());
 
     }
 }
