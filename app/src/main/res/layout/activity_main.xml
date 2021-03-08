@@ -18,6 +18,7 @@
         android:id="@+id/runTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClick"
         android:text="Run Test"
         app:layout_constraintBottom_toBottomOf="parent" />
 
