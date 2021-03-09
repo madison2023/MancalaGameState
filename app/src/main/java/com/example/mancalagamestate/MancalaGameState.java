@@ -14,6 +14,8 @@ public class MancalaGameState implements Serializable {
 
     private boolean rowIsEmpty; //if true game is over
 
+    private int numMarbles;
+
     //constructor for objects of class MancalaGameState
     public MancalaGameState() {
         //initializing the number of marbles in each pocket
@@ -50,18 +52,23 @@ public class MancalaGameState implements Serializable {
 
     @Override
     public String toString(){
-        return "Human Player's Pockets: " + Arrays.toString(humanPlayer) + "\nComputer Player's Pockets: "
-                + Arrays.toString(computerPlayer) + "\nisHumansTurn = " + isHumansTurn + "\nrowIsEmpty = " + rowIsEmpty;
+        return "\nComputer Player's Pockets: " + Arrays.toString(computerPlayer) + "\nHuman Player's Pockets: "
+                + Arrays.toString(humanPlayer) + "\nisHumansTurn = " + isHumansTurn + "\nrowIsEmpty = " + rowIsEmpty + "\nNumMarbles: " + numMarbles;
     }
+
+
+
+
 
     public boolean selectPit(int row, int col) { //columns labeled 0-6, where 0 is the first pocket and 6 is the store
         if(isHumansTurn) {
-            if(row == 1 && humanPlayer[col] != 0 && humanPlayer[col] != 6) { //cant make a move from an empty pit, one that isn't yours, or your store
+            if(row == 1 && humanPlayer[col] != 0 && col != 6) { //cant make a move from an empty pit, one that isn't yours, or your store
                 //set selected pit to zero
-                int numMarbles = humanPlayer[col];
+                numMarbles = humanPlayer[col];
                 humanPlayer[col] = 0;
                 //add one marble to each pit while there are still marbles going into other array if necessary
-                addMarblesToHuman(numMarbles,col);
+                addMarblesToHuman(col+1);
+                isHumansTurn = !isHumansTurn; //next player's turn
                 return true;
             }
             else {
@@ -69,12 +76,13 @@ public class MancalaGameState implements Serializable {
             }
         }
         else {
-            if (row == 1 && computerPlayer[col] != 0 && computerPlayer[col] != 6) { //cant make a move from an empty pit, one that isn't yours, or your store
+            if (row == 1 && computerPlayer[col] != 0 && col != 6) { //cant make a move from an empty pit, one that isn't yours, or your store
                 //set selected pit to zero
-                int numMarbles = computerPlayer[col];
+                numMarbles = computerPlayer[col];
                 computerPlayer[col] = 0;
                 //add one marble to each pit while there are still marbles going into other array if necessary
-                addMarblesToComputer(numMarbles, col);
+                addMarblesToComputer(col+1);
+                isHumansTurn = !isHumansTurn;
                 return true;
             } else {
                 return false;
@@ -82,25 +90,31 @@ public class MancalaGameState implements Serializable {
         }
     }
 
-    public void addMarblesToHuman(int numMarbles, int col){
+    public void addMarblesToHuman(int col){
         while(numMarbles > 0) {
-            if(col != humanPlayer.length) {
-                humanPlayer[col++] += 1;
+            //second half of this if statement is making sure we don't add a marble to the wrong players store
+            if(col != humanPlayer.length && !(col == 6 && !isHumansTurn)) {
+                humanPlayer[col] += 1;
+                col++;
             }
             else {
-                addMarblesToComputer(numMarbles, 0); //would start at the beginning of the marbles array
+                addMarblesToComputer( 0);//would start at the beginning of the marbles array
+                return;
             }
             numMarbles--;
         }
     }
 
-    public void addMarblesToComputer(int numMarbles, int col) {
+    public void addMarblesToComputer(int col) {
         while(numMarbles > 0) {
-            if(col != computerPlayer.length) {
-                computerPlayer[col++] += 1;
+            if(col != computerPlayer.length && !(col == 6 && isHumansTurn)) {
+                computerPlayer[col] += 1;
+                col++;
             }
             else {
-                addMarblesToHuman(numMarbles, 0); //would start at the beginning of the human array
+                addMarblesToHuman(0); //would start at the beginning of the human array
+                return;
+
             }
             numMarbles--;
         }

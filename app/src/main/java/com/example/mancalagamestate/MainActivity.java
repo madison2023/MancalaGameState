@@ -32,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Legal move
         editText.setText(" ");
-        firstInstance.selectPit(1, 3);
-        editText.setText("Player one has selected pit 3");
+        firstInstance.selectPit(1, 5);
+        editText.setText("Player one has selected pit 5");
 
-        editText.append(secondInstance.toString());
+        editText.append(firstInstance.toString());
 
     }
 }
