@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import java.lang.reflect.Constructor;
 
+/**
+ * @author Rachel Madison, Henry Lee, Jordan Nakamura
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -34,8 +37,11 @@ public class MainActivity extends AppCompatActivity {
         editText.setText(" ");
         firstInstance.selectPit(1, 5);
         editText.setText("Player one has selected pit 5");
-
         editText.append(firstInstance.toString());
+
+        editText.append(secondInstance.toString());
+
+        editText.append(fourthInstance.toString());
 
     }
 }

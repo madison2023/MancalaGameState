@@ -3,6 +3,9 @@ package com.example.mancalagamestate;
 import java.io.Serializable;
 import java.util.Arrays;
 
+/**
+ * @author Rachel Madison, Henry Lee, Jordan Nakamura
+ */
 public class MancalaGameState implements Serializable {
     //arrays for each player will store number of marbles in the corresponding pocket
     //ex: if humanPlayer has 4 marbles in their first pocket humanPlayer[0] = 4
@@ -53,7 +56,7 @@ public class MancalaGameState implements Serializable {
     @Override
     public String toString(){
         return "\nComputer Player's Pockets: " + Arrays.toString(computerPlayer) + "\nHuman Player's Pockets: "
-                + Arrays.toString(humanPlayer) + "\nisHumansTurn = " + isHumansTurn + "\nrowIsEmpty = " + rowIsEmpty + "\nNumMarbles: " + numMarbles;
+                + Arrays.toString(humanPlayer) + "\nisHumansTurn = " + isHumansTurn + "\nrowIsEmpty = " + rowIsEmpty + "\nNumMarbles: " + numMarbles + "\n";
     }
 
 
