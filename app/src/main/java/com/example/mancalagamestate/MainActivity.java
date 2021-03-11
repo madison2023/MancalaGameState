@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         editText.setText(" ");
         firstInstance.selectPit(1, 5);
         editText.setText("Player one has selected pit 5");
-        editText.append("\nFirst Instance:" + firstInstance.toString());
 
         editText.append("\nSecond Instance:" + secondInstance.toString());
 
